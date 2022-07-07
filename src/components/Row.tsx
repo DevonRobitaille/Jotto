@@ -14,7 +14,10 @@ const Row: NextPage<IProps> = ({ score, word, correct }) => {
                 {word.split("").map((letter, index) => (
                     <>
                         {/* Letter */}
-                        <div key={letter + index} className="border-r-[3px] border-black w-full h-full capitalize text-center">
+                        <div key={letter + index} className={`
+                        border-r-[3px] border-black w-full h-full capitalize text-center
+                        ${correct ? "bg-score-5" : ""}
+                        `}>
                             <p>{letter}</p>
                         </div>
                     </>
@@ -24,7 +27,7 @@ const Row: NextPage<IProps> = ({ score, word, correct }) => {
             {/* Score */}
             <div className={`
             card
-            ${score === 5
+            ${score === 5 || correct
                     ? 'bg-score-5'
                     : score === 4
                         ? 'bg-score-4'
@@ -39,7 +42,7 @@ const Row: NextPage<IProps> = ({ score, word, correct }) => {
                                         : score === 4
                 }
             `}>
-                <p>{score}</p>
+                <p>{(correct ? "5" : score)}</p>
             </div>
         </div >
     )

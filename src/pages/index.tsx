@@ -5,34 +5,6 @@ import Input from '../components/Input'
 import Row from '../components/Row'
 import { GuessList } from '../schema/guess.schema'
 
-const guesses = [
-  {
-    score: 0,
-    word: 'jotto'
-  },
-  {
-    score: 1,
-    word: 'jotto'
-  },
-  {
-    score: 2,
-    word: 'jotto'
-  },
-  {
-    score: 3,
-    word: 'jotto'
-  },
-  {
-    score: 4,
-    word: 'jotto'
-  },
-  {
-    score: 5,
-    word: 'jotto'
-  },
-
-]
-
 const Home: NextPage = () => {
   const [guesses, setGuesses] = useState<GuessList | null>(null)
 
