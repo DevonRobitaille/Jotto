@@ -13,7 +13,7 @@ const Row: NextPage<IProps> = ({ score, word }) => {
                 {word.split("").map((letter, index) => (
                     <>
                         {/* Letter */}
-                        <div className="border-r-[3px] border-black w-full h-full capitalize text-center">
+                        <div key={letter + index} className="border-r-[3px] border-black w-full h-full capitalize text-center">
                             <p>{letter}</p>
                         </div>
                     </>

@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import Header from '../components/Header'
+import Input from '../components/Input'
 import Row from '../components/Row'
 
 const guesses = [
@@ -31,12 +32,12 @@ const guesses = [
 
 const Home: NextPage = () => {
   return (
-    <div className='w-screen max-w-7xl h-screen mx-auto'>
+    <div className='w-screen max-w-sm h-screen mx-auto relative'>
       {/* Header */}
       <Header />
 
       {/* Score / Result header */}
-      <div className='space-y-5'>
+      <div className='space-y-5 mx-auto flex flex-col mb-[120px]'>
         {guesses.map((guess, index) => (
           <Row key={guess.word + index} score={guess.score} word={guess.word} />
         ))}
@@ -44,7 +45,9 @@ const Home: NextPage = () => {
 
 
       {/* Input */}
-
+      <div className='fixed left-1/2 -translate-x-1/2 z-20 bottom-[35px]'>
+        <Input />
+      </div>
 
     </div>
   )
