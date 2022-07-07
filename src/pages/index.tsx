@@ -24,7 +24,7 @@ const Home: NextPage = () => {
             {/* Score / Result header */}
             < div className='space-y-5 mx-auto flex flex-col mb-[120px]'>
               {guesses && guesses.map((guess, index) => (
-                <Row key={guess.word + index} score={guess.score} word={guess.word} correct={guess.correct} />
+                <Row key={guess.word + index} score={guess.score} word={guess.word} correct={guess.correct} eliminatedChar={eliminatedChar} />
               ))}
             </div>
 
