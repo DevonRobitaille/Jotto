@@ -9,6 +9,8 @@ interface IProps {
     setGuessList: Dispatch<SetStateAction<GuessList | null>>;
     eliminatedChar: Set<string> | null;
     setEliminatedChar: Dispatch<SetStateAction<Set<string>>>;
+    answer?: string;
+    setAnswer: Dispatch<SetStateAction<string | undefined>>;
 }
 
 interface IForm {
@@ -17,11 +19,11 @@ interface IForm {
 
 const Input: NextPage<IProps> = (props) => {
     const { handleSubmit, register, reset } = useForm<IForm>()
-    const { guessList, setGuessList, eliminatedChar, setEliminatedChar } = props;
+    const { guessList, setGuessList, eliminatedChar, setEliminatedChar, answer, setAnswer } = props;
     const mutation = trpc.useMutation(['guess.guess'])
 
     const onSubmit: SubmitHandler<IForm> = async (data) => {
-        const result = mutation.mutate({ word: data.word.toUpperCase() }, {
+        const result = mutation.mutate({ word: data.word.toUpperCase(), answer }, {
             onSuccess: (res) => {
                 setGuessList((prevState) => prevState = (prevState) ? [...prevState, {
                     word: data.word,
@@ -37,6 +39,8 @@ const Input: NextPage<IProps> = (props) => {
                     res.eliminatedChar.forEach((char: string) => prevState.add(char))
                     return prevState
                 })
+
+                setAnswer((prevState) => prevState = res.answer)
             }
         })
 

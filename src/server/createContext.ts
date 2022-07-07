@@ -15,9 +15,8 @@ export function createContext({
     req: NextApiRequest
     res: NextApiResponse
 }) {
-    const answer = "JOTTO";
 
-    return { req, res, answer }
+    return { req, res }
 }
 
 export type Context = ReturnType<typeof createContext>

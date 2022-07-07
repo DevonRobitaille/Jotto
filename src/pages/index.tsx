@@ -10,6 +10,7 @@ const Home: NextPage = () => {
   const [guesses, setGuesses] = useState<GuessList | null>(null)
   const [eliminatedChar, setEliminatedChar] = useState<Set<string>>(new Set())
   const [showCheatPage, setShowCheatPage] = useState<boolean>(false)
+  const [answer, setAnswer] = useState<string | undefined>(undefined)
 
   return (
     <div className='w-screen max-w-sm h-screen mx-auto relative'>
@@ -30,7 +31,7 @@ const Home: NextPage = () => {
 
 
             {/* Input */}
-            <Input guessList={guesses} setGuessList={setGuesses} eliminatedChar={eliminatedChar} setEliminatedChar={setEliminatedChar} />
+            <Input guessList={guesses} answer={answer} setAnswer={setAnswer} setGuessList={setGuesses} eliminatedChar={eliminatedChar} setEliminatedChar={setEliminatedChar} />
           </>
         )
       }

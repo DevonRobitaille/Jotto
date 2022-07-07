@@ -1,7 +1,8 @@
-import { z } from 'zod'
 import {
-    guessSchema
+    guessSchema,
+    guessOutputSchema
 } from '../../schema/guess.schema'
+import getRandomLine from '../../utils/generateAnswer';
 import { createRouter } from '../createRouter'
 
 const countMatchingLetters = (s1: string, s2: string): number => {
@@ -22,15 +23,12 @@ const countMatchingLetters = (s1: string, s2: string): number => {
 export const guessRouter = createRouter()
     .mutation('guess', {
         input: guessSchema,
-        output: z.object({
-            score: z.number().lte(5).gte(0),
-            correct: z.boolean(),
-            eliminatedChar: z.string().array().min(0).max(5)
-        }),
+        output: guessOutputSchema,
         resolve({ ctx, input }) {
             // logic for counting score
-            const { word } = input;
-            const answer = ctx.answer;
+            let { word, answer } = input;
+
+            if (!answer) answer = getRandomLine().trim().slice(0, 5)
 
             const score: number = countMatchingLetters(word, answer);
             const correct = word === answer;
@@ -41,7 +39,8 @@ export const guessRouter = createRouter()
             return {
                 score,
                 correct,
-                eliminatedChar
+                eliminatedChar,
+                answer
             }
         }
     })
