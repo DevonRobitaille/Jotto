@@ -3,9 +3,10 @@ import { NextPage } from 'next'
 interface IProps {
     score: number,
     word: string;
+    correct: boolean;
 }
 
-const Row: NextPage<IProps> = ({ score, word }) => {
+const Row: NextPage<IProps> = ({ score, word, correct }) => {
     return (
         <div className='flex'>
             {/* Word */}

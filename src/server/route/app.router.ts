@@ -7,7 +7,9 @@
 */
 
 import { createRouter } from "../createRouter";
+import { guessRouter } from "./guess.router";
 
 export const appRouter = createRouter()
+    .merge('guess.', guessRouter)
 
 export type AppRouter = typeof appRouter

@@ -1,7 +1,9 @@
 import type { NextPage } from 'next'
+import { useState } from 'react'
 import Header from '../components/Header'
 import Input from '../components/Input'
 import Row from '../components/Row'
+import { GuessList } from '../schema/guess.schema'
 
 const guesses = [
   {
@@ -27,10 +29,13 @@ const guesses = [
   {
     score: 5,
     word: 'jotto'
-  }
+  },
+
 ]
 
 const Home: NextPage = () => {
+  const [guesses, setGuesses] = useState<GuessList | null>(null)
+
   return (
     <div className='w-screen max-w-sm h-screen mx-auto relative'>
       {/* Header */}
@@ -38,16 +43,14 @@ const Home: NextPage = () => {
 
       {/* Score / Result header */}
       <div className='space-y-5 mx-auto flex flex-col mb-[120px]'>
-        {guesses.map((guess, index) => (
-          <Row key={guess.word + index} score={guess.score} word={guess.word} />
+        {guesses && guesses.map((guess, index) => (
+          <Row key={guess.word + index} score={guess.score} word={guess.word} correct={guess.correct} />
         ))}
       </div>
 
 
       {/* Input */}
-      <div className='fixed left-1/2 -translate-x-1/2 z-20 bottom-[35px]'>
-        <Input />
-      </div>
+      <Input guessList={guesses} setGuessList={setGuesses} />
 
     </div>
   )
