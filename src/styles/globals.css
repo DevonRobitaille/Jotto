@@ -9,4 +9,8 @@
         font-family: 'Bebas Neue', normal, sans-serif, ultra-condensed;
         background: #FFDCA8;
     }
+
+    .card {
+        @apply border-2 border-black rounded-[5px] text-[32px] font-semibold px-[6px] shadow-custom
+    }
 }
