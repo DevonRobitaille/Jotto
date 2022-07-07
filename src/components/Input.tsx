@@ -7,6 +7,8 @@ import { trpc } from '../utils/trpc';
 interface IProps {
     guessList: GuessList | null;
     setGuessList: Dispatch<SetStateAction<GuessList | null>>;
+    eliminatedChar: Set<string> | null;
+    setEliminatedChar: Dispatch<SetStateAction<Set<string>>>;
 }
 
 interface IForm {
@@ -15,7 +17,7 @@ interface IForm {
 
 const Input: NextPage<IProps> = (props) => {
     const { handleSubmit, register, reset } = useForm<IForm>()
-    const { guessList, setGuessList } = props;
+    const { guessList, setGuessList, eliminatedChar, setEliminatedChar } = props;
     const mutation = trpc.useMutation(['guess.guess'])
 
     const onSubmit: SubmitHandler<IForm> = async (data) => {
@@ -30,6 +32,11 @@ const Input: NextPage<IProps> = (props) => {
                     score: res.score,
                     correct: res.correct
                 }])
+
+                setEliminatedChar((prevState) => {
+                    res.eliminatedChar.forEach((char: string) => prevState.add(char))
+                    return prevState
+                })
             }
         })
 

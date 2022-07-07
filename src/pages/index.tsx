@@ -7,6 +7,9 @@ import { GuessList } from '../schema/guess.schema'
 
 const Home: NextPage = () => {
   const [guesses, setGuesses] = useState<GuessList | null>(null)
+  const [eliminatedChar, setEliminatedChar] = useState<Set<string>>(new Set())
+
+  console.log(eliminatedChar)
 
   return (
     <div className='w-screen max-w-sm h-screen mx-auto relative'>
@@ -22,7 +25,7 @@ const Home: NextPage = () => {
 
 
       {/* Input */}
-      <Input guessList={guesses} setGuessList={setGuesses} />
+      <Input guessList={guesses} setGuessList={setGuesses} eliminatedChar={eliminatedChar} setEliminatedChar={setEliminatedChar} />
 
     </div>
   )

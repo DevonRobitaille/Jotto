@@ -24,7 +24,8 @@ export const guessRouter = createRouter()
         input: guessSchema,
         output: z.object({
             score: z.number().lte(5).gte(0),
-            correct: z.boolean()
+            correct: z.boolean(),
+            eliminatedChar: z.string().array().min(0).max(5)
         }),
         resolve({ ctx, input }) {
             // logic for counting score
@@ -34,9 +35,13 @@ export const guessRouter = createRouter()
             const score: number = countMatchingLetters(word, answer);
             const correct = word === answer;
 
+            // eliminated characters
+            const eliminatedChar: string[] = (score === 0) ? [...word.split("")] : []
+
             return {
                 score,
-                correct
+                correct,
+                eliminatedChar
             }
         }
     })
