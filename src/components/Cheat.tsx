@@ -18,8 +18,8 @@ const Cheat: NextPage<IProps> = ({ eliminatedList, correctList }) => {
                             {(index === 25) && <div className='col-span-2' />}
                             <div className={`
                                 card text-center
-                                ${correctList.has(char.toUpperCase()) ? " bg-score-5 " : ""}
-                                ${eliminatedList.has(char.toUpperCase()) ? "bg-[#CCC] text-[#BBB] " : "bg-white text-black "}
+                                ${correctList.has(char) ? " bg-score-5 " : " "}
+                                ${eliminatedList.has(char) ? "bg-[#CCC] text-[#BBB] " : " "}
                             `}>{char}</div>
                         </>
                     )

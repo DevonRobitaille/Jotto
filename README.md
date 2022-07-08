@@ -1,23 +1,48 @@
-# Next.js + Tailwind CSS Example
+# JOTTO
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+### Description
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A take on Wordle where the only information provided during gameplay is the total number of correct letters irregardless if the specific location was correct.
 
-## Deploy your own
+### Features
+* Randomly generate 5 letter word from the backend.
+* Submit guesses and see whether letters and correct or wrong.
+* Select specific letters in words to state that they are eliminated.
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+### Technologies used
+* tRPC
+* TypeScript
+* NextJS
+* Zod - Schema validation and type generation
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+<br>
 
-## How to use
+## Getting Started
+___
+### What you will need
+* A server to host the package
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
+### Setup
+1. Clone repo
+2. npm install
+3. Run dev server: <br>
+`npm run dev`
 
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-# or
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-# or
-pnpm create next-app --example with-tailwindcss with-tailwindcss-app
-```
+### Easy Hosting
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We recommend using **Vercel** to host the website.
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+<br>
+
+## Screenshots
+___
+<p>View on first visiting website</p>
+<img src='./imgs/start.png'/>
+<hr/>
+<p>View while playing the game</p>
+<img src='./imgs/playing.png'/>
+<hr/>
+<p>View after selecting the question mark in the upper right corner</p>
+<img src='./imgs/cheat.png'/>
+<hr/>
+<p>Tooltip when hovering over question mark</p>
+<img src='./imgs/tooltip.png'/>
+<br>

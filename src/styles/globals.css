@@ -11,6 +11,6 @@
     }
 
     .card {
-        @apply border-2 border-black rounded-[5px] text-[32px] font-semibold px-[6px] shadow-custom
+        @apply border-2 border-black rounded-[5px] text-[32px] font-semibold px-[6px] shadow-custom bg-white
     }
 }
