@@ -1,14 +1,40 @@
 import { NextPage } from 'next'
+import { Dispatch, SetStateAction } from 'react';
+import { GuessList } from '../schema/guess.schema';
 
 interface IProps {
-    score: number,
-    word: string;
-    correct: boolean;
+    guess: {
+        score: number,
+        word: string;
+        correct: boolean;
+        playerEliminated: Set<string>;
+        id: string;
+    }
     eliminatedList: Set<string>;
     correctList: Set<string>;
+    setGuesses: Dispatch<SetStateAction<GuessList>>;
+    guessList: GuessList;
 }
 
-const Row: NextPage<IProps> = ({ score, word, correct, eliminatedList, correctList }) => {
+const Row: NextPage<IProps> = ({ guess: { id, score, word, correct, playerEliminated }, guessList, setGuesses, eliminatedList, correctList }) => {
+
+    const togglePlayerEliminated = (letter: string) => {
+        if (playerEliminated.has(letter)) playerEliminated.delete(letter)
+        else playerEliminated.add(letter)
+
+        let guessIndex: number = guessList.map(g => g.id).indexOf(id);
+        let newGuessList = guessList;
+        newGuessList.splice(guessIndex, 1, {
+            id,
+            score,
+            word,
+            correct,
+            playerEliminated
+        })
+
+        setGuesses((prevState) => prevState = [...newGuessList])
+    }
+
     return (
         <div className='flex'>
             {/* Word */}
@@ -16,9 +42,10 @@ const Row: NextPage<IProps> = ({ score, word, correct, eliminatedList, correctLi
                 {word.split("").map((letter, index) => (
                     <>
                         {/* Letter */}
-                        <div key={letter + index} className={`
+                        <div onClick={() => togglePlayerEliminated(letter)} key={letter + index} className={`
                         border-r-[3px] border-black w-full h-full capitalize text-center
                         ${correct ? " bg-score-5 " : ""}
+                        ${playerEliminated.has(letter.toUpperCase()) ? " bg-[#CCC] text-[#BBB] " : ""}
                         ${eliminatedList.has(letter.toUpperCase()) ? " bg-[#CCC] text-[#BBB] " : ""}
                         ${correctList.has(letter.toUpperCase()) ? " bg-score-5 " : ""}
                         `}>

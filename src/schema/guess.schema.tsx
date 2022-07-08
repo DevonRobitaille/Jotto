@@ -10,9 +10,11 @@ export const guessSchema = z.object({
 export type Guess = z.TypeOf<typeof guessSchema>
 
 export const guessListSchema = z.object({
+    id: z.string(),
     word: z.string().regex(wordRegex),
     score: z.number().lte(5).gte(0),
-    correct: z.boolean()
+    correct: z.boolean(),
+    playerEliminated: z.set(z.string()),
 }).array()
 
 export type GuessList = z.TypeOf<typeof guessListSchema>

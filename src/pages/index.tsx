@@ -7,7 +7,7 @@ import Row from '../components/Row'
 import { GuessList } from '../schema/guess.schema'
 
 const Home: NextPage = () => {
-  const [guesses, setGuesses] = useState<GuessList | null>(null)
+  const [guesses, setGuesses] = useState<GuessList>([])
   const [eliminatedList, setEliminatedList] = useState<Set<string>>(new Set())
   const [correctList, setCorrectList] = useState<Set<string>>(new Set())
   const [showCheatPage, setShowCheatPage] = useState<boolean>(false)
@@ -26,7 +26,7 @@ const Home: NextPage = () => {
             {/* Score / Result header */}
             < div className='space-y-5 mx-auto flex flex-col mb-[120px]'>
               {guesses && guesses.map((guess, index) => (
-                <Row key={guess.word + index} score={guess.score} word={guess.word} correct={guess.correct} eliminatedList={eliminatedList} correctList={correctList} />
+                <Row key={guess.word + index} guess={guess} guessList={guesses} setGuesses={setGuesses} eliminatedList={eliminatedList} correctList={correctList} />
               ))}
             </div>
 

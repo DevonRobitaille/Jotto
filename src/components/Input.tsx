@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid';
 import { NextPage } from 'next'
 import { Dispatch, SetStateAction } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form'
@@ -5,8 +6,8 @@ import { GuessList } from '../schema/guess.schema';
 import { trpc } from '../utils/trpc';
 
 interface IProps {
-    guessList: GuessList | null;
-    setGuessList: Dispatch<SetStateAction<GuessList | null>>;
+    guessList: GuessList;
+    setGuessList: Dispatch<SetStateAction<GuessList>>;
     eliminatedList: Set<string>;
     setEliminatedList: Dispatch<SetStateAction<Set<string>>>;
     answer?: string;
@@ -37,11 +38,15 @@ const Input: NextPage<IProps> = (props) => {
                     ? [...guessList, {
                         word: word,
                         score: res.score,
-                        correct: res.correct
+                        correct: res.correct,
+                        playerEliminated: new Set<string>(),
+                        id: nanoid()
                     }] : [{
                         word: word,
                         score: res.score,
-                        correct: res.correct
+                        correct: res.correct,
+                        playerEliminated: new Set<string>(),
+                        id: nanoid()
                     }];
 
                 // Create new Eliminated list
