@@ -52,3 +52,8 @@ ___
 <p>Tooltip when hovering over plus icon</p>
 <img src='./imgs/tooltip-new game.png'/>
 <br>
+
+### TODO
+___
+- Winning Screen
+- [ ] Left Click (correct letter), Right Click (eliminate letter)
