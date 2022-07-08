@@ -55,5 +55,5 @@ ___
 
 ### TODO
 ___
-- Winning Screen
+- [ ] Winning Screen
 - [ ] Left Click (correct letter), Right Click (eliminate letter)
