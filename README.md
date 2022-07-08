@@ -7,6 +7,8 @@
 * Randomly generate 5 letter word from the backend.
 * Submit guesses and see whether letters and correct or wrong.
 * Select specific letters in words to state that they are eliminated.
+* Start a new game with the plus icon.
+* See a list of the alphabet along with known eliminated and correct letters, through the question mark icon.
 
 ### Technologies used
 * tRPC
@@ -44,5 +46,8 @@ ___
 <img src='./imgs/cheat.png'/>
 <hr/>
 <p>Tooltip when hovering over question mark</p>
-<img src='./imgs/tooltip.png'/>
+<img src='./imgs/tooltip-cheat page.png'/>
+<hr/>
+<p>Tooltip when hovering over plus icon</p>
+<img src='./imgs/tooltip-new game.png'/>
 <br>
