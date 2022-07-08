@@ -7,6 +7,7 @@
 * Randomly generate 5 letter word from the backend.
 * Submit guesses and see whether letters and correct or wrong.
 * Select specific letters in words to state that they are eliminated.
+* Select specific letters from an alphabet and they are eliminated app wide.
 * Start a new game with the plus icon.
 * See a list of the alphabet along with known eliminated and correct letters, through the question mark icon.
 
