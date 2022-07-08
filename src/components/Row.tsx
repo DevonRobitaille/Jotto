@@ -14,9 +14,10 @@ interface IProps {
     correctList: Set<string>;
     setGuesses: Dispatch<SetStateAction<GuessList>>;
     guessList: GuessList;
+    playerEliminatedList: Set<string>;
 }
 
-const Row: NextPage<IProps> = ({ guess: { id, score, word, correct, playerEliminated }, guessList, setGuesses, eliminatedList, correctList }) => {
+const Row: NextPage<IProps> = ({ guess: { id, score, word, correct, playerEliminated }, playerEliminatedList, guessList, setGuesses, eliminatedList, correctList }) => {
 
     const togglePlayerEliminated = (letter: string) => {
         if (playerEliminated.has(letter)) playerEliminated.delete(letter)
@@ -44,10 +45,11 @@ const Row: NextPage<IProps> = ({ guess: { id, score, word, correct, playerElimin
                         {/* Letter */}
                         <div onClick={() => togglePlayerEliminated(letter)} key={letter + index} className={`
                         hover:cursor-pointer border-r-[3px] border-black w-full h-full capitalize text-center
+                        ${playerEliminatedList.has(letter) ? " bg-[#CCC] text-[#BBB] " : ""}
+                        ${playerEliminated.has(letter) ? " bg-[#CCC] text-[#BBB] " : ""}
+                        ${eliminatedList.has(letter) ? " bg-[#CCC] text-[#BBB] " : ""}
+                        ${correctList.has(letter) ? " bg-score-5 " : ""}
                         ${correct ? " bg-score-5 " : ""}
-                        ${playerEliminated.has(letter.toUpperCase()) ? " bg-[#CCC] text-[#BBB] " : ""}
-                        ${eliminatedList.has(letter.toUpperCase()) ? " bg-[#CCC] text-[#BBB] " : ""}
-                        ${correctList.has(letter.toUpperCase()) ? " bg-score-5 " : ""}
                         `}>
                             <p>{letter}</p>
                         </div>

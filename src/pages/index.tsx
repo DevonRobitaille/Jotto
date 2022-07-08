@@ -12,6 +12,7 @@ const Home: NextPage = () => {
   const [correctList, setCorrectList] = useState<Set<string>>(new Set())
   const [showCheatPage, setShowCheatPage] = useState<boolean>(false)
   const [answer, setAnswer] = useState<string | undefined>(undefined)
+  const [playerEliminatedList, setPlayerEliminatedList] = useState<Set<string>>(new Set())
 
   return (
     <div className='w-screen max-w-sm h-screen mx-auto relative'>
@@ -20,19 +21,19 @@ const Home: NextPage = () => {
 
       {showCheatPage
         ? (
-          <Cheat eliminatedList={eliminatedList} correctList={correctList} />
+          <Cheat eliminatedList={eliminatedList} correctList={correctList} playerEliminatedList={playerEliminatedList} setPlayerEliminatedList={setPlayerEliminatedList} />
         ) : (
           <>
             {/* Score / Result header */}
             < div className='space-y-5 mx-auto flex flex-col mb-[120px]'>
               {guesses && guesses.map((guess, index) => (
-                <Row key={guess.word + index} guess={guess} guessList={guesses} setGuesses={setGuesses} eliminatedList={eliminatedList} correctList={correctList} />
+                <Row playerEliminatedList={playerEliminatedList} key={guess.word + index} guess={guess} guessList={guesses} setGuesses={setGuesses} eliminatedList={eliminatedList} correctList={correctList} />
               ))}
             </div>
 
 
             {/* Input */}
-            <Input guessList={guesses} answer={answer} setAnswer={setAnswer} setGuessList={setGuesses} eliminatedList={eliminatedList} setEliminatedList={setEliminatedList} correctList={correctList} setCorrectList={setCorrectList} />
+            <Input playerEliminatedList={playerEliminatedList} setPlayerEliminatedList={setPlayerEliminatedList} guessList={guesses} answer={answer} setAnswer={setAnswer} setGuessList={setGuesses} eliminatedList={eliminatedList} setEliminatedList={setEliminatedList} correctList={correctList} setCorrectList={setCorrectList} />
           </>
         )
       }

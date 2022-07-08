@@ -14,6 +14,8 @@ interface IProps {
     setAnswer: Dispatch<SetStateAction<string | undefined>>;
     correctList: Set<string>;
     setCorrectList: Dispatch<SetStateAction<Set<string>>>;
+    setPlayerEliminatedList: Dispatch<SetStateAction<Set<string>>>;
+    playerEliminatedList: Set<string>;
 }
 
 interface IForm {
@@ -22,7 +24,7 @@ interface IForm {
 
 const Input: NextPage<IProps> = (props) => {
     const { handleSubmit, register, reset } = useForm<IForm>()
-    const { guessList, setGuessList, eliminatedList, setEliminatedList, answer, setAnswer, correctList, setCorrectList } = props;
+    const { guessList, setGuessList, eliminatedList, setEliminatedList, answer, setAnswer, correctList, setCorrectList, setPlayerEliminatedList, playerEliminatedList } = props;
     const mutation = trpc.useMutation(['guess.guess'])
 
     const alpha: number[] = Array.from(Array(26)).map((e, i) => i + 65);
@@ -108,6 +110,9 @@ const Input: NextPage<IProps> = (props) => {
 
                 // Update Correct List
                 setCorrectList((prevState) => prevState = newCorrectList)
+
+                // Update Player Eliminated List
+                setPlayerEliminatedList((prevState) => new Set([...Array.from(playerEliminatedList).filter((letter) => !newCorrectList.has(letter))]))
             }
         })
 
