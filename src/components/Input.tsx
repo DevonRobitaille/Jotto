@@ -79,8 +79,6 @@ const Input: NextPage<IProps> = (props) => {
                         }
                     })
 
-                    // Step 3 - See if difference between two words is equal
-
                     // Break or not?
                     if (tmpCorrectList === newCorrectList && tmpEliminatedList === newEliminatedList) {
                         // console.log("------")
