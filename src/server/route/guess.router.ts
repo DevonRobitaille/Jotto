@@ -30,18 +30,12 @@ export const guessRouter = createRouter()
 
             if (!answer) answer = getRandomLine().trim().slice(0, 5).toUpperCase()
 
-            console.log(answer, word)
-
             const score: number = countMatchingLetters(word, answer);
             const correct = word === answer;
-
-            // eliminated characters
-            const eliminatedList: string[] = (score === 0) ? [...word.split("")] : []
 
             return {
                 score,
                 correct,
-                eliminatedList,
                 answer
             }
         }

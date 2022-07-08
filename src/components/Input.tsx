@@ -32,6 +32,7 @@ const Input: NextPage<IProps> = (props) => {
             onSuccess: (res) => {
                 const word = data.word.toUpperCase()
 
+                // Create new Guess List
                 const newGuessList = (guessList)
                     ? [...guessList, {
                         word: word,
@@ -43,8 +44,10 @@ const Input: NextPage<IProps> = (props) => {
                         correct: res.correct
                     }];
 
+                // Create new Eliminated list
+                const elminatedChars: string[] = (res.score === 0) ? [...word.split("")] : []
                 let newEliminatedList: Set<string> = eliminatedList;
-                res.eliminatedList.forEach((char: string) => newEliminatedList.add(char))
+                elminatedChars.forEach((char: string) => newEliminatedList.add(char))
 
                 // Update Guess List
                 setGuessList((prevState) => prevState = newGuessList)
@@ -81,9 +84,6 @@ const Input: NextPage<IProps> = (props) => {
 
                     // Break or not?
                     if (tmpCorrectList === newCorrectList && tmpEliminatedList === newEliminatedList) {
-                        // console.log("------")
-                        // console.log(newCorrectList, tmpCorrectList)
-                        // console.log(tmpEliminatedList, newEliminatedList)
                         newCorrectList = tmpCorrectList;
                         newEliminatedList = tmpEliminatedList;
                         break;
