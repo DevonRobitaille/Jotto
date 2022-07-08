@@ -36,7 +36,9 @@ const Input: NextPage<IProps> = (props) => {
                 score: number,
                 correct: boolean,
                 answer: string
-            }) => {
+            } | undefined) => {
+                if (!res) return;
+
                 const word = data.word.toUpperCase()
 
                 // Create new Guess List

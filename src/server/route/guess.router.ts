@@ -3,6 +3,7 @@ import {
     guessOutputSchema
 } from '../../schema/guess.schema'
 import getRandomLine from '../../utils/generateAnswer';
+import verifyGuess from '../../utils/verifyGuess';
 import { createRouter } from '../createRouter'
 
 const countMatchingLetters = (s1: string, s2: string): number => {
@@ -23,10 +24,12 @@ const countMatchingLetters = (s1: string, s2: string): number => {
 export const guessRouter = createRouter()
     .mutation('guess', {
         input: guessSchema,
-        output: guessOutputSchema,
+        output: guessOutputSchema.optional(),
         resolve({ ctx, input }) {
             // logic for counting score
             let { word, answer } = input;
+
+            if (!verifyGuess(word)) return undefined
 
             if (!answer) answer = getRandomLine().trim().slice(0, 5).toUpperCase()
 
