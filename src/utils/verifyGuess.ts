@@ -1,6 +1,8 @@
 import { words } from './words';
 export const verifyGuess = (guess: string): boolean => {
-    const foundWord = words.includes(guess)
+    console.log(words)
+    const foundWord: boolean = words.includes(guess.toLowerCase())
+    console.log(guess, foundWord)
     return foundWord
 }
 
