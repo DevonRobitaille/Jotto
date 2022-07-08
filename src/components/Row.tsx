@@ -43,7 +43,7 @@ const Row: NextPage<IProps> = ({ guess: { id, score, word, correct, playerElimin
                     <>
                         {/* Letter */}
                         <div onClick={() => togglePlayerEliminated(letter)} key={letter + index} className={`
-                        border-r-[3px] border-black w-full h-full capitalize text-center
+                        hover:cursor-pointer border-r-[3px] border-black w-full h-full capitalize text-center
                         ${correct ? " bg-score-5 " : ""}
                         ${playerEliminated.has(letter.toUpperCase()) ? " bg-[#CCC] text-[#BBB] " : ""}
                         ${eliminatedList.has(letter.toUpperCase()) ? " bg-[#CCC] text-[#BBB] " : ""}
