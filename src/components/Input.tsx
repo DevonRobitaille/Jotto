@@ -31,6 +31,7 @@ const Input: NextPage<IProps> = (props) => {
     const alphabet: string[] = alpha.map((x) => String.fromCharCode(x));
 
     const onSubmit: SubmitHandler<IForm> = async (data) => {
+        console.log(process.env.NEXT_PUBLIC_VERCEL_URL)
         const result = mutation.mutate({ word: data.word.toUpperCase(), answer }, {
             onSuccess: (res: {
                 score: number,
