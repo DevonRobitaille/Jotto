@@ -28,7 +28,9 @@ export const guessRouter = createRouter()
             // logic for counting score
             let { word, answer } = input;
 
-            if (!answer) answer = getRandomLine().trim().slice(0, 5)
+            if (!answer) answer = getRandomLine().trim().slice(0, 5).toUpperCase()
+
+            console.log(answer, word)
 
             const score: number = countMatchingLetters(word, answer);
             const correct = word === answer;

@@ -11,6 +11,8 @@ interface IProps {
     setEliminatedChar: Dispatch<SetStateAction<Set<string>>>;
     answer?: string;
     setAnswer: Dispatch<SetStateAction<string | undefined>>;
+    correctChar: Set<string> | null;
+    setCorrectChar: Dispatch<SetStateAction<Set<string>>>;
 }
 
 interface IForm {
@@ -19,12 +21,13 @@ interface IForm {
 
 const Input: NextPage<IProps> = (props) => {
     const { handleSubmit, register, reset } = useForm<IForm>()
-    const { guessList, setGuessList, eliminatedChar, setEliminatedChar, answer, setAnswer } = props;
+    const { guessList, setGuessList, eliminatedChar, setEliminatedChar, answer, setAnswer, correctChar, setCorrectChar } = props;
     const mutation = trpc.useMutation(['guess.guess'])
 
     const onSubmit: SubmitHandler<IForm> = async (data) => {
         const result = mutation.mutate({ word: data.word.toUpperCase(), answer }, {
             onSuccess: (res) => {
+                // Update Guess List
                 setGuessList((prevState) => prevState = (prevState) ? [...prevState, {
                     word: data.word,
                     score: res.score,
@@ -35,11 +38,25 @@ const Input: NextPage<IProps> = (props) => {
                     correct: res.correct
                 }])
 
+                // Update Eliminated List
                 setEliminatedChar((prevState) => {
                     res.eliminatedChar.forEach((char: string) => prevState.add(char))
                     return prevState
                 })
 
+                // // Updated Correct List
+                // let resultSet: Set<string> = new Set()
+                // guessList?.forEach((guess) => {
+                //     let score: number = guess.score;
+                //     let chars: string[] = guess.word.split("");
+
+                //     const remaining = chars.filter((char) => !eliminatedChar?.has(char))
+
+                //     console.log(remaining)
+                // })
+
+                // console.log(res.answer, res.eliminatedChar)
+                // Save Answer
                 setAnswer((prevState) => prevState = res.answer)
             }
         })

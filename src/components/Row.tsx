@@ -5,9 +5,10 @@ interface IProps {
     word: string;
     correct: boolean;
     eliminatedChar: Set<string>;
+    correctChar: Set<string>;
 }
 
-const Row: NextPage<IProps> = ({ score, word, correct, eliminatedChar }) => {
+const Row: NextPage<IProps> = ({ score, word, correct, eliminatedChar, correctChar }) => {
     return (
         <div className='flex'>
             {/* Word */}
@@ -17,8 +18,9 @@ const Row: NextPage<IProps> = ({ score, word, correct, eliminatedChar }) => {
                         {/* Letter */}
                         <div key={letter + index} className={`
                         border-r-[3px] border-black w-full h-full capitalize text-center
-                        ${correct ? "bg-score-5" : ""}
-                        ${eliminatedChar.has(letter.toUpperCase()) ? "bg-[#CCC] text-[#BBB]" : ""}
+                        ${correct ? " bg-score-5 " : ""}
+                        ${eliminatedChar.has(letter.toUpperCase()) ? " bg-[#CCC] text-[#BBB] " : ""}
+                        ${correctChar.has(letter.toUpperCase()) ? " bg-score-5 " : ""}
                         `}>
                             <p>{letter}</p>
                         </div>
