@@ -36,12 +36,12 @@ export const guessRouter = createRouter()
             const correct = word === answer;
 
             // eliminated characters
-            const eliminatedChar: string[] = (score === 0) ? [...word.split("")] : []
+            const eliminatedList: string[] = (score === 0) ? [...word.split("")] : []
 
             return {
                 score,
                 correct,
-                eliminatedChar,
+                eliminatedList,
                 answer
             }
         }

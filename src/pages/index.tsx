@@ -8,8 +8,8 @@ import { GuessList } from '../schema/guess.schema'
 
 const Home: NextPage = () => {
   const [guesses, setGuesses] = useState<GuessList | null>(null)
-  const [eliminatedChar, setEliminatedChar] = useState<Set<string>>(new Set())
-  const [correctChar, setCorrectChar] = useState<Set<string>>(new Set())
+  const [eliminatedList, setEliminatedList] = useState<Set<string>>(new Set())
+  const [correctList, setCorrectList] = useState<Set<string>>(new Set())
   const [showCheatPage, setShowCheatPage] = useState<boolean>(false)
   const [answer, setAnswer] = useState<string | undefined>(undefined)
 
@@ -20,19 +20,19 @@ const Home: NextPage = () => {
 
       {showCheatPage
         ? (
-          <Cheat eliminatedChar={eliminatedChar} />
+          <Cheat eliminatedList={eliminatedList} correctList={correctList} />
         ) : (
           <>
             {/* Score / Result header */}
             < div className='space-y-5 mx-auto flex flex-col mb-[120px]'>
               {guesses && guesses.map((guess, index) => (
-                <Row key={guess.word + index} score={guess.score} word={guess.word} correct={guess.correct} eliminatedChar={eliminatedChar} correctChar={correctChar} />
+                <Row key={guess.word + index} score={guess.score} word={guess.word} correct={guess.correct} eliminatedList={eliminatedList} correctList={correctList} />
               ))}
             </div>
 
 
             {/* Input */}
-            <Input guessList={guesses} answer={answer} setAnswer={setAnswer} setGuessList={setGuesses} eliminatedChar={eliminatedChar} setEliminatedChar={setEliminatedChar} correctChar={correctChar} setCorrectChar={setCorrectChar} />
+            <Input guessList={guesses} answer={answer} setAnswer={setAnswer} setGuessList={setGuesses} eliminatedList={eliminatedList} setEliminatedList={setEliminatedList} correctList={correctList} setCorrectList={setCorrectList} />
           </>
         )
       }

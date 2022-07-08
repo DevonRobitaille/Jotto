@@ -20,7 +20,7 @@ export type GuessList = z.TypeOf<typeof guessListSchema>
 export const guessOutputSchema = z.object({
     score: z.number().lte(5).gte(0),
     correct: z.boolean(),
-    eliminatedChar: z.string().array().min(0).max(5),
+    eliminatedList: z.string().array().min(0).max(5),
     answer: z.string().length(5),
 })
 
