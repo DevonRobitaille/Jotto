@@ -32,7 +32,11 @@ const Input: NextPage<IProps> = (props) => {
 
     const onSubmit: SubmitHandler<IForm> = async (data) => {
         const result = mutation.mutate({ word: data.word.toUpperCase(), answer }, {
-            onSuccess: (res) => {
+            onSuccess: (res: {
+                score: number,
+                correct: boolean,
+                answer: string
+            }) => {
                 const word = data.word.toUpperCase()
 
                 // Create new Guess List
