@@ -22,7 +22,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 export default withTRPC<AppRouter>({
   config({ ctx }) {
     const links = [
-      loggerLink(),
       httpBatchLink({
         maxBatchSize: 10,
         url,

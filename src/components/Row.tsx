@@ -46,9 +46,7 @@ const Row: NextPage<IProps> = ({ guess: { id, score, word, correct }, playerList
             {/* Word */}
             <div className='bg-white card mx-[30px] w-[250px] flex justify-evenly p-0 m-0 g-0'>
                 {word.split("").map((letter, index) => (
-                    <>
-                        {/* Letter */}
-                        <div onClick={() => togglePlayerList(letter)} key={letter + index} className={`
+                    <div key={letter + index} onClick={() => togglePlayerList(letter)} className={`
                         hover:cursor-pointer border-r-[3px] border-black w-full h-full capitalize text-center
                         ${playerList.eliminated.has(letter) && !correctList.has(letter) && !eliminatedList.has(letter) ? " bg-[#CCC] text-[#BBB] " : ""}
                         ${playerList.correct.has(letter) && !correctList.has(letter) && !eliminatedList.has(letter) ? " bg-score-5 " : ""}
@@ -56,9 +54,8 @@ const Row: NextPage<IProps> = ({ guess: { id, score, word, correct }, playerList
                         ${correctList.has(letter) ? " bg-score-5 " : ""}
                         ${correct ? " bg-score-5 " : ""}
                         `}>
-                            <p>{letter}</p>
-                        </div>
-                    </>
+                        <p>{letter}</p>
+                    </div>
                 ))}
             </div>
 
