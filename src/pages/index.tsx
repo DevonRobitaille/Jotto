@@ -12,7 +12,14 @@ const Home: NextPage = () => {
   const [correctList, setCorrectList] = useState<Set<string>>(new Set())
   const [showCheatPage, setShowCheatPage] = useState<boolean>(false)
   const [answer, setAnswer] = useState<string | undefined>(undefined)
-  const [playerEliminatedList, setPlayerEliminatedList] = useState<Set<string>>(new Set())
+
+  const [playerList, setPlayerList] = useState<{
+    eliminated: Set<string>,
+    correct: Set<string>
+  }>({
+    eliminated: new Set(),
+    correct: new Set()
+  })
 
   let gameOver: string | null = null;
   guesses.forEach((guess) => {
@@ -38,20 +45,20 @@ const Home: NextPage = () => {
               {
                 showCheatPage
                   ? (
-                    <Cheat eliminatedList={eliminatedList} correctList={correctList} playerEliminatedList={playerEliminatedList} setPlayerEliminatedList={setPlayerEliminatedList} />
+                    <Cheat eliminatedList={eliminatedList} correctList={correctList} playerList={playerList} setPlayerList={setPlayerList} />
                   ) : (
                     <>
                       {/* Score / Result header */}
                       < div className='space-y-5 mx-auto flex flex-col mb-[120px]' >
                         {guesses && guesses.map((guess, index) => (
-                          <Row playerEliminatedList={playerEliminatedList} key={guess.word + index} guess={guess} guessList={guesses} setGuesses={setGuesses} eliminatedList={eliminatedList} correctList={correctList} />
+                          <Row key={guess.word + index} guess={guess} playerList={playerList} setPlayerList={setPlayerList} eliminatedList={eliminatedList} correctList={correctList} />
                         ))
                         }
                       </div >
 
 
                       {/* Input */}
-                      < Input playerEliminatedList={playerEliminatedList} setPlayerEliminatedList={setPlayerEliminatedList} guessList={guesses} answer={answer} setAnswer={setAnswer} setGuessList={setGuesses} eliminatedList={eliminatedList} setEliminatedList={setEliminatedList} correctList={correctList} setCorrectList={setCorrectList} />
+                      < Input guessList={guesses} answer={answer} setAnswer={setAnswer} setGuessList={setGuesses} eliminatedList={eliminatedList} setEliminatedList={setEliminatedList} correctList={correctList} setCorrectList={setCorrectList} />
                     </>
                   )
               }

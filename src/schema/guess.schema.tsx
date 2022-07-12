@@ -14,7 +14,6 @@ export const guessListSchema = z.object({
     word: z.string().regex(wordRegex),
     score: z.number().lte(5).gte(0),
     correct: z.boolean(),
-    playerEliminated: z.set(z.string()),
 }).array()
 
 export type GuessList = z.TypeOf<typeof guessListSchema>

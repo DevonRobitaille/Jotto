@@ -7,33 +7,38 @@ interface IProps {
         score: number,
         word: string;
         correct: boolean;
-        playerEliminated: Set<string>;
         id: string;
     }
     eliminatedList: Set<string>;
     correctList: Set<string>;
-    setGuesses: Dispatch<SetStateAction<GuessList>>;
-    guessList: GuessList;
-    playerEliminatedList: Set<string>;
+    playerList: {
+        eliminated: Set<string>;
+        correct: Set<string>
+    };
+    setPlayerList: Dispatch<SetStateAction<{
+        eliminated: Set<string>;
+        correct: Set<string>
+    }>>;
+
 }
 
-const Row: NextPage<IProps> = ({ guess: { id, score, word, correct, playerEliminated }, playerEliminatedList, guessList, setGuesses, eliminatedList, correctList }) => {
+const Row: NextPage<IProps> = ({ guess: { id, score, word, correct }, playerList, setPlayerList, eliminatedList, correctList }) => {
 
-    const togglePlayerEliminated = (letter: string) => {
-        if (playerEliminated.has(letter)) playerEliminated.delete(letter)
-        else playerEliminated.add(letter)
+    const togglePlayerList = (letter: string) => {
+        if (playerList.correct.has(letter)) {
+            playerList.correct.delete(letter)
+        } else if (playerList.eliminated.has(letter)) {
+            playerList.eliminated.delete(letter)
+            playerList.correct.add(letter)
+        } else playerList.eliminated.add(letter)
 
-        let guessIndex: number = guessList.map(g => g.id).indexOf(id);
-        let newGuessList = guessList;
-        newGuessList.splice(guessIndex, 1, {
-            id,
-            score,
-            word,
-            correct,
-            playerEliminated
+        setPlayerList((prevState) => {
+            return {
+                ...prevState,
+                eliminated: playerList.eliminated,
+                correct: playerList.correct
+            }
         })
-
-        setGuesses((prevState) => prevState = [...newGuessList])
     }
 
     return (
@@ -43,10 +48,10 @@ const Row: NextPage<IProps> = ({ guess: { id, score, word, correct, playerElimin
                 {word.split("").map((letter, index) => (
                     <>
                         {/* Letter */}
-                        <div onClick={() => togglePlayerEliminated(letter)} key={letter + index} className={`
+                        <div onClick={() => togglePlayerList(letter)} key={letter + index} className={`
                         hover:cursor-pointer border-r-[3px] border-black w-full h-full capitalize text-center
-                        ${playerEliminatedList.has(letter) ? " bg-[#CCC] text-[#BBB] " : ""}
-                        ${playerEliminated.has(letter) ? " bg-[#CCC] text-[#BBB] " : ""}
+                        ${playerList.eliminated.has(letter) && !correctList.has(letter) && !eliminatedList.has(letter) ? " bg-[#CCC] text-[#BBB] " : ""}
+                        ${playerList.correct.has(letter) && !correctList.has(letter) && !eliminatedList.has(letter) ? " bg-score-5 " : ""}
                         ${eliminatedList.has(letter) ? " bg-[#CCC] text-[#BBB] " : ""}
                         ${correctList.has(letter) ? " bg-score-5 " : ""}
                         ${correct ? " bg-score-5 " : ""}

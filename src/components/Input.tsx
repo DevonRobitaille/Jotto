@@ -14,8 +14,14 @@ interface IProps {
     setAnswer: Dispatch<SetStateAction<string | undefined>>;
     correctList: Set<string>;
     setCorrectList: Dispatch<SetStateAction<Set<string>>>;
-    setPlayerEliminatedList: Dispatch<SetStateAction<Set<string>>>;
-    playerEliminatedList: Set<string>;
+    playerList: {
+        eliminated: Set<string>;
+        correct: Set<string>
+    };
+    setPlayerList: Dispatch<SetStateAction<{
+        eliminated: Set<string>;
+        correct: Set<string>
+    }>>;
 }
 
 interface IForm {
@@ -24,7 +30,7 @@ interface IForm {
 
 const Input: NextPage<IProps> = (props) => {
     const { handleSubmit, register, reset } = useForm<IForm>()
-    const { guessList, setGuessList, eliminatedList, setEliminatedList, answer, setAnswer, correctList, setCorrectList, setPlayerEliminatedList, playerEliminatedList } = props;
+    const { guessList, setGuessList, eliminatedList, setEliminatedList, answer, setAnswer, correctList, setCorrectList, playerList, setPlayerList } = props;
     const mutation = trpc.useMutation(['guess.guess'])
 
     const alpha: number[] = Array.from(Array(26)).map((e, i) => i + 65);
@@ -47,13 +53,11 @@ const Input: NextPage<IProps> = (props) => {
                         word: word,
                         score: res.score,
                         correct: res.correct,
-                        playerEliminated: new Set<string>(),
                         id: nanoid()
                     }] : [{
                         word: word,
                         score: res.score,
                         correct: res.correct,
-                        playerEliminated: new Set<string>(),
                         id: nanoid()
                     }];
 
@@ -118,7 +122,14 @@ const Input: NextPage<IProps> = (props) => {
                 setCorrectList((prevState) => prevState = newCorrectList)
 
                 // Update Player Eliminated List
-                setPlayerEliminatedList((prevState) => new Set([...Array.from(playerEliminatedList).filter((letter) => !newCorrectList.has(letter))]))
+                // setPlayerEliminatedList((prevState) => new Set([...Array.from(playerEliminatedList).filter((letter) => !newCorrectList.has(letter))]))
+                setPlayerList((prevState) => {
+                    return {
+                        ...prevState,
+                        eliminated: new Set([...Array.from(playerList.eliminated).filter((letter) => !newEliminatedList.has(letter))]),
+                        correct: new Set([...Array.from(playerList.correct).filter((letter) => !newCorrectList.has(letter))])
+                    }
+                })
             }
         })
 
