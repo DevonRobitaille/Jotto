@@ -58,7 +58,7 @@ const Home: NextPage = () => {
 
 
                       {/* Input */}
-                      < Input guessList={guesses} answer={answer} setAnswer={setAnswer} setGuessList={setGuesses} eliminatedList={eliminatedList} setEliminatedList={setEliminatedList} correctList={correctList} setCorrectList={setCorrectList} />
+                      < Input guessList={guesses} answer={answer} setAnswer={setAnswer} setGuessList={setGuesses} eliminatedList={eliminatedList} setEliminatedList={setEliminatedList} correctList={correctList} setCorrectList={setCorrectList} playerList={playerList} setPlayerList={setPlayerList} />
                     </>
                   )
               }
