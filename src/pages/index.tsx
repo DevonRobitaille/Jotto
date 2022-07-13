@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 import Cheat from '../components/Cheat'
 import Header from '../components/Header'
@@ -12,7 +13,6 @@ const Home: NextPage = () => {
   const [correctList, setCorrectList] = useState<Set<string>>(new Set())
   const [showCheatPage, setShowCheatPage] = useState<boolean>(false)
   const [answer, setAnswer] = useState<string | undefined>(undefined)
-
   const [playerList, setPlayerList] = useState<{
     eliminated: Set<string>,
     correct: Set<string>
@@ -26,6 +26,8 @@ const Home: NextPage = () => {
     if (guess.correct) gameOver = guess.word;
   })
 
+  const router = useRouter()
+
   return (
     <>
       {
@@ -33,8 +35,12 @@ const Home: NextPage = () => {
           ? (
             <>
               < Header showCheatPage={showCheatPage} setShowCheatPage={setShowCheatPage} />
-              <div>
-                <h1 className='text-center text-3xl mt-40'>The word was <span className='font-bold text-score-0'>'{gameOver}'</span></h1>
+              <div className='flex flex-col justify-center items-center mx-3'>
+                <div className='card mt-40 flex flex-col items-center max-w-lg space-y-5 py-5'>
+                  <h1 className='text-center flex-wrap text-3xl mx-10 max-w-md'>The word was <span className='font-bold text-score-0'>'{gameOver}'</span></h1>
+                  <h2 className='text-center text-2xl mx-10 max-w-md'>It took <span className='font-bold text-score-0'>'{guesses.length}'</span> guesses.</h2>
+                </div>
+                <button onClick={() => router.reload()} className='flex mx-auto mt-10 text-4xl card bg-score-5 hover:bg-score-4'>New Game</button>
               </div>
             </>
           ) : (

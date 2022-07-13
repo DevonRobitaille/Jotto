@@ -51,4 +51,7 @@ ___
 <hr/>
 <p>Tooltip when hovering over plus icon</p>
 <img src='./imgs/tooltip-new game.png'/>
+<hr/>
+<p>Game Won Screen</p>
+<img src='./imgs/gameover.png'/>
 <br>
